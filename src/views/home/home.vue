@@ -1,13 +1,6 @@
 <template>
   <step>
     <div slot="content" @click="focusInput" style="height: 100%">
-      <ul>
-        <li v-for="item in items" :key="item.id">
-          <check-item :item="item"
-                      @item-toggled="itemToggled"
-                      @delete-item="deleteItem"></check-item>
-        </li>
-      </ul>
       <textarea
         ref="userInput"
         autofocus
@@ -17,7 +10,13 @@
         @keypress="keyPressed"
         v-model="userInput">
       </textarea>
-
+      <ul>
+        <li v-for="item in items" :key="item.id">
+          <check-item :item="item"
+                      @item-toggled="itemToggled"
+                      @delete-item="deleteItem"></check-item>
+        </li>
+      </ul>
     </div>
   </step>
 </template>
@@ -26,9 +25,12 @@
 
 <style lang="scss" scoped>
   textarea {
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
     width: 90%;
     font-size: 22px;
+    border-radius: 4px;
   }
 
   ul {

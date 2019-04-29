@@ -13,6 +13,7 @@ export interface ICheckItem {
 
 export interface IItemState {
   items: ICheckItem[];
+  insertedDemoItems: boolean;
 }
 
 export interface RootState {
@@ -37,12 +38,13 @@ export function generateStoreData(): StoreOptions<RootState> {
         } as IItemState,
         getters: {
           items: (context: IItemState) => {
-            if (!context.items || context.items.length === 0) {
+            if (!context.insertedDemoItems && (!context.items || context.items.length === 0)) {
               context.items = [
-                {id: v4(), label: "item #1", checked: false},
-                {id: v4(), label: "item #2", checked: false},
-                {id: v4(), label: "item #3", checked: false}
+                {id: v4(), label: "To Add an item", checked: false},
+                {id: v4(), label: "Type in the box above", checked: false},
+                {id: v4(), label: "And press enter", checked: false},
               ];
+              context.insertedDemoItems = true;
             }
             return context.items;
           }

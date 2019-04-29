@@ -27,7 +27,8 @@ function createWindow() {
     icon,
     width: 800,
     height: 600,
-    frame: false
+    frame: false,
+    transparent: true
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -43,7 +44,6 @@ function createWindow() {
   }
 
   win.hide();
-
   win.on("close", ev => {
     ev.preventDefault();
     win.hide();
@@ -99,6 +99,10 @@ function createTrayIcon() {
   tray.setToolTip("PLAN");
   tray.setContextMenu(menu);
   // TODO: try to get single-click to open the main window
+  tray.on("click", () => {
+    win.show();
+    win.focus();
+  });
 }
 
 // Exit cleanly on request from parent process in development mode.

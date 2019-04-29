@@ -2,7 +2,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { ICheckItem } from "@/store/store";
 import { Getter, Mutation } from "vuex-class";
-import { Prop, Watch } from "vue-property-decorator";
+import { Watch } from "vue-property-decorator";
 
 const namespace = {namespace: "plan"};
 
