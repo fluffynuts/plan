@@ -3,13 +3,15 @@ import App from "./app.vue";
 import { router } from "./router";
 import { store } from "@/store/store";
 import { autoRegisterComponents } from "@/auto-register-components";
+import VDDL from "vddl";
 
 Vue.config.productionTip = false;
 
 (async () => {
   autoRegisterComponents();
+  Vue.use(VDDL);
   // @ts-ignore
-  window["__" + "app"] = new Vue({
+  const app = new Vue({
     router,
     store,
     render: (h) => h(App),
@@ -17,4 +19,6 @@ Vue.config.productionTip = false;
       this.$router.push("/");
     }
   }).$mount("#app");
+
+
 })();

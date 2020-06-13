@@ -10,20 +10,49 @@
         @keypress="keyPressed"
         v-model="userInput">
       </textarea>
-      <ul>
-        <li v-for="item in items" :key="item.id">
-          <check-item :item="item"
-                      @item-toggled="itemToggled"
-                      @delete-item="deleteItem"></check-item>
-        </li>
-      </ul>
+      <vddl-list
+        :horizontal="false"
+        :list="items">
+        <vddl-draggable
+          v-for="(item, index) in items"
+          :key="item.id"
+          :draggable="item"
+          :index="index"
+          :wrapper="items"
+          :drop="handleDrop"
+          effect-allowed="move">
+          <vddl-handle></vddl-handle>
+          <check-item
+            :item="item"
+            :moved="handleMoved"
+            @item-toggled="itemToggled"
+            @delete-item="deleteItem"></check-item>
+        </vddl-draggable>
+      </vddl-list>
+<!--      <ul>-->
+<!--        <li v-for="item in items" :key="item.id">-->
+<!--          <check-item :item="item"-->
+<!--                      @item-toggled="itemToggled"-->
+<!--                      @delete-item="deleteItem"></check-item>-->
+<!--        </li>-->
+<!--      </ul>-->
     </div>
   </step>
 </template>
 
-<script lang="ts" src="./home.ts"></script>
+<script lang="ts" src="./home.ts">
+</script>
 
 <style lang="scss" scoped>
+  .vdd-list, .vddl-draggable {
+    position: relative;
+  }
+  .vddl-dragging {
+    opacity: 0.7;
+  }
+  .vddl-dragging-source {
+    display: none;
+  }
   textarea {
     margin-left: auto;
     margin-right: auto;

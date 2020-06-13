@@ -66,12 +66,20 @@ export function generateStoreData(): StoreOptions<RootState> {
           deleteItem: (context: IItemState, id: string) => {
             context.items = context.items.filter(o => o.id !== id);
           },
+          deleteItemAt: (context: IItemState, index: number) => {
+            console.log("delete item at", index);
+            context.items.splice(index, 1);
+          },
           addItem: (context: IItemState, label: string) => {
             context.items.push({
               id: v4(),
               label,
               checked: false
             });
+          },
+          insertItem: (context: IItemState, payload: { item: ICheckItem, index: number }) => {
+            console.log("insert item", payload);
+            context.items.splice(payload.index, 0, payload.item);
           }
         }
       }

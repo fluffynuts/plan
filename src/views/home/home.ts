@@ -6,7 +6,9 @@ import { Watch } from "vue-property-decorator";
 
 const namespace = {namespace: "plan"};
 
-@Component({name: "home"})
+@Component({
+  name: "home"
+})
 export default class Home extends Vue {
   @Getter("items", namespace)
   public items: ICheckItem[];
@@ -19,6 +21,12 @@ export default class Home extends Vue {
 
   @Mutation("addItem", namespace)
   public addItem: (label: string) => void;
+
+  @Mutation("insertItem", namespace)
+  public insertItem: (payload: { item: ICheckItem, index: number }) => void;
+
+  @Mutation("deleteItemAt", namespace)
+  public deleteItemAt: (index: number) => void;
 
   public userInput: string = null;
   public userInputRows = 1;
@@ -72,5 +80,15 @@ export default class Home extends Vue {
 
   public focusInput() {
     (this.$refs.userInput as HTMLTextAreaElement).focus();
+  }
+
+  public handleMoved(index: number) {
+    console.log("handleMoved");
+    this.deleteItemAt(index);
+  }
+
+  public handleDrop(draggable: { item: ICheckItem, index: number }) {
+    console.log("handleDrop");
+    this.insertItem(draggable);
   }
 }
