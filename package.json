@@ -46,7 +46,7 @@
     "electron-icon-builder": "^1.0.0",
     "faker": "^4.1.0",
     "lodash.get": "^4.4.2",
-    "lodash.merge": "^4.6.1",
+    "lodash.merge": "^4.6.2",
     "node-sass": "^4.9.0",
     "rimraf": "^2.6.3",
     "sass-loader": "^7.1.0",
